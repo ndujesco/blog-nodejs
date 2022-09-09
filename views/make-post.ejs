@@ -1,0 +1,91 @@
+<%- include("header.ejs") %>
+
+
+    <style>
+        .form .empty {
+            border: solid .05px rgb(225, 19, 19);
+            box-shadow: 0 0 5px red;
+
+        }
+    </style>
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('/img/edit-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+
+                        <h1>New Post</h1>
+
+                        <span class="subheading">You're going to make a great blog post!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+                <script type="text/javascript">
+                    CKEDITOR.replace("textarea", {
+                        language: "",
+                        height: 0,
+                        width: 0,
+                        codeSnippet_theme: "monokai_sublime",
+                        imageUploadUrl: "",
+                        filebrowserUploadUrl: "",
+                        filebrowserBrowseUrl: "",
+                        extraPlugins: "",
+                        // CSRF token header for XHR request
+
+                    });
+                </script>
+                <% if (errorMessage) { %>
+                    <em>
+                        <p style="color:#ee6f57;">
+                            <%= errorMessage %>
+                        </p>
+                    </em>
+                    <%} %>
+
+                        <form action="/<%= editing ? 'edit-post' : 'new-post' %>" method="post" class="form" role="form"
+                            novalidate>
+                            <!-- The id if we are editing -->
+                            <input type="hidden" value="<%= prevValues.id %>" name="postId">
+                            <div class="form-group  required"><label class="control-label" for="title">Blog Post
+                                    Title</label>
+                                <input
+                                    class="form-control <%= errors.some(error => error.param === 'title') ? 'empty' : '' %>"
+                                    id="title" name="title" required type="text" value="<%= prevValues.title %>">
+                            </div>
+                            <div class="form-group  required"><label class="control-label"
+                                    for="subtitle">Subtitle</label>
+                                <input
+                                    class="form-control <%= errors.some(error => error.param === 'subtitle') ? 'empty' : '' %>"
+                                    id="subtitle" name="subtitle" required type="text"
+                                    value="<%= prevValues.subtitle %>">
+                            </div>
+                            <div class="form-group  required"><label class="control-label" for="img_url">Blog Image
+                                    URL</label>
+                                <input
+                                    class="form-control <%= errors.some(error => error.param === 'imageUrl') ? 'empty' : '' %>"
+                                    id="img_url" name="imageUrl" required type="text"
+                                    value="<%= prevValues.imageUrl %>">
+                            </div>
+                            <div class="form-group  required"><label class="control-label" for="body">Blog
+                                    Content</label>
+                                <textarea class="ckeditor form-control" id="
+                            body" name="body" required><%= prevValues.body %></textarea>
+                            </div>
+                            <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Submit Post">
+
+                        </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include("footer.ejs") %>

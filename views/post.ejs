@@ -1,0 +1,91 @@
+<%- include ("header.ejs") %>
+    <header class="masthead" style="background-image: url('<%= post.imageUrl %>')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>
+                            <%= post.title %>
+                        </h1>
+                        <h2 class="subheading">
+                            <%= post.subtitle %>
+                        </h2>
+                        <span class="meta">Posted by
+                            <a href="#">
+                                <%= post.author.name %>
+                            </a>
+                            on <%= post.date %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <%- post.body %>
+                        <hr>
+
+                        <% if (isAdmin) { %>
+                            <div class="clearfix">
+                                <a class="btn btn-primary float-right" href="/edit-post?postId=<%= post.id %>">Edit
+                                    Post</a>
+                            </div>
+                            <%}%>
+                                <!--           Comments Area -->
+                                <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+                                <script type="text/javascript">
+                                    CKEDITOR.replace("comment", {
+                                        language: "",
+                                        height: 0,
+                                        width: 0,
+                                        codeSnippet_theme: "monokai_sublime",
+                                        imageUploadUrl: "",
+                                        filebrowserUploadUrl: "",
+                                        filebrowserBrowseUrl: "",
+                                        extraPlugins: "",
+                                        // CSRF token header for XHR request
+
+                                    });
+                                </script>
+
+                                <form action="/comment" method="post" class="form" role="form">
+                                    <input type="hidden" name="postId" value="<%= post.id %>">
+                                    <div class="form-group  required"><label class="control-label"
+                                            for="comment">Comment</label>
+                                        <textarea class="ckeditor form-control" id="comment" name="comment"
+                                            required></textarea>
+                                    </div>
+                                    <input class="btn btn-primary" id="submit" name="submit" type="submit"
+                                        value="SUBMIT COMMENT">
+                                </form><br>
+
+                                <div class="col-lg-8 col-md-10 mx-auto comment">
+                                    <ul class="commentList">
+                                        <% post.comments.forEach( comment=> { %>
+                                            <li>
+                                                <div class="commenterImage">
+
+                                                    <img
+                                                        src='<%= gravatar.url(comment.author.email , { s: "100" , r: "x", d: "identicon" }, true ); %>' />
+                                                </div>
+                                                <div class="commentText">
+                                                    <%- comment.text %>
+                                                        <span class="date sub-text">
+                                                            <%= comment.author.name %>
+                                                        </span>
+                                                </div>
+                                            </li>
+                                            <% }) %>
+
+                                </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <%- include ("footer.ejs") %>

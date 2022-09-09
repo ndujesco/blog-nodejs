@@ -1,0 +1,48 @@
+<%- include ("../header.ejs") %>
+
+
+    <header class="masthead"
+        style="background-image: url('https://images.unsplash.com/photo-1484100356142-db6ab6244067?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>Log In</h1>
+                        <span class="subheading">Welcome Back!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto content">
+                <% if (errorMessage) { %>
+                    <em>
+                        <p style="color:#ee6f57;">
+                            <%= errorMessage %>
+                        </p>
+                    </em>
+                    <%} %>
+                        <form action="/auth/login" method="post" class="form" role="form" novalidate>
+                            <div class="form-group  required"><label class="control-label" for="email">Email</label>
+                                <input class="form-control" id="email" name="email" required type="text"
+                                    value="<%= prevValues.email %>">
+                            </div>
+                            <div class="form-group  required"><label class="control-label"
+                                    for="password">Password</label>
+                                <input class="form-control" id="password" name="password" required type="password"
+                                    value="<%= prevValues.password %>">
+                            </div>
+                            <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Let Me In!">
+
+                        </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../footer.ejs") %>
