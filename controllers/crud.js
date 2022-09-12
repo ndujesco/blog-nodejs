@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const Comment = require("../models/comment");
+const Message = require("../models/message");
 const Post = require("../models/post");
 const User = require("../models/user");
 const { sendEmail } = require("../utils/email");
@@ -178,4 +179,6 @@ exports.postContact = (req, res, next) => {
   }
   res.status(200).json({ status: 200 });
   sendEmail(req.body);
+  const message = new Message(req.body);
+  message.save();
 };
