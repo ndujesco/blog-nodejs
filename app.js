@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 });
 main()
   .then((connect) => {
-    app.listen(process.env.PORT || 8080);
+    app.listen(process.env.PORT || 3000);
   })
   .catch((err) => {
     console.log("There was an error connecting to the mongoDB database");
