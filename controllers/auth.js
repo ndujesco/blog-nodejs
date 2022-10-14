@@ -7,6 +7,7 @@ exports.getSignup = (req, res, next) => {
     pageTitle: "Register",
     errorMessage: "",
     prevValues: {},
+    subTitle: "SignUp, Collection of random-musings",
   });
 };
 
@@ -15,6 +16,7 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     errorMessage: "",
     prevValues: {},
+    subTitle: "Login, Collection of random-musings",
   });
 };
 
@@ -26,6 +28,7 @@ exports.postSignUp = async (req, res, next) => {
       pageTitle: "Register",
       errorMessage: errors.array()[0].msg,
       prevValues: req.body,
+      subTitle: "SignUp, Collection of random-musings",
     });
   }
   try {
@@ -60,6 +63,7 @@ exports.postLogin = async (req, res, next) => {
       pageTitle: "Login",
       errorMessage: errors.array()[0].msg,
       prevValues: req.body,
+      subTitle: "login, Collection of random-musings",
     });
   }
   try {

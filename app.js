@@ -67,7 +67,12 @@ app.use("/auth", authRoutes);
 
 app.use((req, res, next) => {
   const url = decodeURI(req.url);
-  res.render("404", { pageTitle: "404", url });
+
+  res.render("404", {
+    pageTitle: "404",
+    url,
+    subTitle: "Page Not Found Collection of random-musings",
+  });
 });
 main()
   .then((connect) => {
