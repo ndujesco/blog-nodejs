@@ -19,7 +19,8 @@ exports.getIndexPage = async (req, res, next) => {
 exports.getAboutPage = (req, res, next) => {
   res.render("about", {
     pageTitle: "About",
-    subTitle: "Ndujekwu Ugochukwu Peter, Backend Developer, Undergraduate",
+    subTitle:
+      "About Ndujekwu Ugochukwu Peter, Backend Developer, Undergraduate",
   });
 };
 exports.getContactPage = (req, res, next) => {
@@ -109,6 +110,7 @@ exports.postEditPost = async (req, res, next) => {
       prevValues: req.body,
       errorMessage: errors.array()[0].msg,
       editing: true,
+      subTitle: "",
     });
   }
   try {
@@ -140,6 +142,7 @@ exports.getShowPost = async (req, res, next) => {
       pageTitle: post.title,
       post,
       gravatar: require("gravatar"),
+      subTitle: post.subtitle,
     });
   } catch (error) {
     console.log(error);
