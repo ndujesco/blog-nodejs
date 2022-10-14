@@ -11,6 +11,7 @@ exports.getIndexPage = async (req, res, next) => {
   }).populate("author");
   res.render("index", {
     pageTitle: "ugo's blog",
+    subTitle: "A collection of my random musings",
     posts,
   });
 };
@@ -18,11 +19,13 @@ exports.getIndexPage = async (req, res, next) => {
 exports.getAboutPage = (req, res, next) => {
   res.render("about", {
     pageTitle: "About",
+    subTitle: "Ndujekwu Ugochukwu Peter, Backend Developer, Undergraduate",
   });
 };
 exports.getContactPage = (req, res, next) => {
   res.render("contact", {
     pageTitle: "Contact",
+    subTitle: "Contact Ndujekwu Ugochukwu, Backend Developer, Undergraduate",
   });
 };
 
@@ -33,6 +36,7 @@ exports.getMakePost = (req, res, next) => {
     prevValues: {},
     errorMessage: "",
     editing: false,
+    subTitle: "",
   });
 };
 
@@ -46,6 +50,7 @@ exports.postMakePost = async (req, res, next) => {
       prevValues: req.body,
       errorMessage: errors.array()[0].msg,
       editing: false,
+      subTitle: "",
     });
   }
   const options = {
@@ -87,6 +92,7 @@ exports.getEditPost = async (req, res, next) => {
       prevValues: post,
       errorMessage: "",
       editing: true,
+      subTitle: "",
     });
   } catch (error) {
     return res.redirect("/post?postId=" + postId);
