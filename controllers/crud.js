@@ -26,7 +26,7 @@ exports.getAboutPage = (req, res, next) => {
 exports.getContactPage = (req, res, next) => {
   res.render("contact", {
     pageTitle: "Contact",
-    subTitle: "Contact Ndujekwu Ugochukwu, Backend Developer, Undergraduate",
+    subTitle: "Contact Ndujekwu Ugochukwu",
   });
 };
 
