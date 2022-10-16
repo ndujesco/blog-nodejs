@@ -11,7 +11,8 @@
   <meta property="og:title" content="<%= pageTitle %>">
   <meta property="og:description" content="<%= subTitle %>">
   <meta property="og:image"
-    content="https://avatars.githubusercontent.com/u/92054718?s=400&u=8e78c26006a3e8e25e2cb5413599b766f24597ce&v=4">
+    content="<%= titles.includes(pageTitle) ? post.imageUrl : 'https://avatars.githubusercontent.com/u/92054718?s=400&u=8e78c26006a3e8e25e2cb5413599b766f24597ce&v=4' %>">
+
   <meta property="profile:first_name" content="Ugochukwu">
   <meta property="profile:last_name" content="Ndujekwu">
   <meta name="theme-color" content="#131313">

@@ -9,6 +9,7 @@ const crudRoutes = require("./routes/crud");
 const authRoutes = require("./routes/auth");
 const User = require("./models/user");
 const gravatar = require("gravatar");
+const Post = require("./models/post");
 
 const MONGODB_PRACTICE_URI = "mongodb://localhost:27017/blogDB";
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.83uvt.mongodb.net/blogDB?retryWrites=true&w=majority`;
@@ -52,7 +53,7 @@ app.use(async (req, res, next) => {
   }
 });
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.isAuthenticated = req.session.isAuthenticated;
   res.locals.year = new Date().getFullYear();
   let isAdmin;
@@ -60,6 +61,14 @@ app.use((req, res, next) => {
     isAdmin = process.env.ADMIN_ID === req.user.id;
   }
   res.locals.isAdmin = isAdmin;
+
+  const posts = await Post.find();
+  const titles = [];
+
+  posts.forEach((post) => {
+    titles.push(post.title);
+  });
+  res.locals.titles = titles;
   next();
 });
 app.use(crudRoutes);
@@ -76,7 +85,9 @@ app.use((req, res, next) => {
 });
 main()
   .then((connect) => {
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("E deh rush!!!!");
+    });
   })
   .catch((err) => {
     console.log("There was an error connecting to the mongoDB database");
