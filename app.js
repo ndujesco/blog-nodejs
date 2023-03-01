@@ -86,7 +86,7 @@ app.use((req, res, next) => {
 main()
   .then((connect) => {
     app.listen(process.env.PORT || 3000, () => {
-      console.log("E deh rush!!!!");
+      console.log("E deh rush!!!");
     });
   })
   .catch((err) => {
