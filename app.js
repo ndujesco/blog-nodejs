@@ -82,6 +82,7 @@ app.use((req, res, next) => {
     url,
     subTitle: "Page Not Found Collection of random-musings",
   });
+  
 });
 main()
   .then((connect) => {
