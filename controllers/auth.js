@@ -1,8 +1,12 @@
 const { validationResult } = require("express-validator");
 const { hashPassword, comparePassword } = require("../utils/custom-crypt");
+const bcrypt = require("bcryptjs");
+
 const User = require("../models/user");
 
-exports.getSignup = (req, res, next) => {
+
+
+exports.getSignup = async (req, res, next) => {
   res.render("auth/signup", {
     pageTitle: "Register",
     errorMessage: "",
@@ -32,7 +36,7 @@ exports.postSignUp = async (req, res, next) => {
     });
   }
   try {
-    const hashedPassword = await hashPassword(password);
+    const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       email,
       name,
@@ -76,7 +80,8 @@ exports.postLogin = async (req, res, next) => {
         subTitle: "ugo's blog - login",
       });
     }
-    const matches = await comparePassword(user.password, password);
+    const matches = await bcrypt.compare(password, user.password);
+
     if (!matches) {
       return res.status(422).render("auth/login", {
         pageTitle: "Login",
@@ -105,3 +110,5 @@ exports.getLogout = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+

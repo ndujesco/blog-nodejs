@@ -179,6 +179,7 @@ exports.deletePost = async (req, res, next) => {
   res.json({ message: "Deleted Post!" });
 };
 
+
 exports.postContact = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
