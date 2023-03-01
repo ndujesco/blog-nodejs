@@ -1,10 +1,7 @@
 const { validationResult } = require("express-validator");
-const { hashPassword, comparePassword } = require("../utils/custom-crypt");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
-
-
 
 exports.getSignup = async (req, res, next) => {
   res.render("auth/signup", {
